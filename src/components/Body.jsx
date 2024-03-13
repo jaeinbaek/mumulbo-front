@@ -1,14 +1,12 @@
-import { Center, Container } from '@chakra-ui/react'
+import { Center, Container, Flex} from '@chakra-ui/react'
 import Chatting from './Chatting';
 
 function Body() {
     return (
-      <div className="body">
-        <Center>
-             <Container>
+      <div className="body" >
+             <Container h='calc(100vh)'>
                  <Chatting />
              </Container>
-        </Center>
       </div>
     );
   }

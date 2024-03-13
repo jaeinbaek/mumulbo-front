@@ -1,24 +1,45 @@
-import { Flex, Box } from '@chakra-ui/react'
+import { Flex, Box, Stack, Text, Divider} from '@chakra-ui/react'
 
 function ChatMessage(props) {
-
-    return (
-        <div>
-            {
-                props.messages.map(message => (
-                        <Flex>
-                            <Box
-                                w='100%'
-                                p={4}
-                                color={message.isUser ? 'grey' : 'white'}
-                            >
-                                {message.message}
-                            </Box>
-                        </Flex>
-                ))
-            }
-        </div>
-    );
+    if (props.isUser) {
+        // USER
+        return (
+            <Stack
+                textAlign='left'
+                py='4'
+            >
+                <Box
+                    w='100%'
+                >
+                    <Text fontSize='xs'>You, {props.timestamp}</Text>
+                </Box>
+                <Box
+                    w='100%'
+                >
+                    <Text fontSize='m'>{props.message}</Text>
+                </Box>
+            </Stack>
+        );
+    } else {
+        // Reply
+        return (
+            <Stack
+                textAlign='left'
+                py='4'
+            >
+                <Box
+                    w='100%'
+                >
+                    <Text fontSize='xs'>Reply, {props.timestamp}</Text>
+                </Box>
+                <Box
+                    w='100%'
+                >
+                    <Text fontSize='m'>{props.message}</Text>
+                </Box>
+            </Stack>
+        );
+    }
 }
 
 export default ChatMessage;
