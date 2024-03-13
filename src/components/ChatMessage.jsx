@@ -1,12 +1,13 @@
-import { Flex, Box, Stack, Text, Divider} from '@chakra-ui/react'
+import { Box, Stack, Text, Divider} from '@chakra-ui/react'
 
 function ChatMessage(props) {
     if (props.isUser) {
         // USER
         return (
             <Stack
-                textAlign='left'
-                py='4'
+                textAlign='right'
+                py='5px'
+                mr='10px'
             >
                 <Box
                     w='100%'
@@ -25,7 +26,7 @@ function ChatMessage(props) {
         return (
             <Stack
                 textAlign='left'
-                py='4'
+                py='5px'
             >
                 <Box
                     w='100%'
@@ -37,6 +38,7 @@ function ChatMessage(props) {
                 >
                     <Text fontSize='m'>{props.message}</Text>
                 </Box>
+                <Divider />
             </Stack>
         );
     }

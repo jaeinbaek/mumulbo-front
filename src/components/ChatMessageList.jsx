@@ -1,4 +1,4 @@
-import { Flex, Container, Box, Stack, Text } from '@chakra-ui/react'
+import { Flex, Stack, Text } from '@chakra-ui/react'
 import ChatMessage from './ChatMessage';
 
 function ChatMessageList(props) {
@@ -24,7 +24,7 @@ function ChatMessageList(props) {
             <Text
                 mb='50px'
             >
-                모르는거 빼고 다 물어보세요
+                모르는거 빼고 다 압니다~
             </Text>
             </Stack>
 

@@ -3,7 +3,6 @@ import {
   Switch,
   Text,
   Flex,
-  Wrap
   } from '@chakra-ui/react'
 
 function ToggleThemeSwitch() {

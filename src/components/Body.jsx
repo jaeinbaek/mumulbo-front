@@ -1,4 +1,4 @@
-import { Center, Container, Flex} from '@chakra-ui/react'
+import { Container } from '@chakra-ui/react'
 import Chatting from './Chatting';
 
 function Body() {
