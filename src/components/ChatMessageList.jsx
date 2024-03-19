@@ -8,6 +8,7 @@ function ChatMessageList(props) {
             {
                 props.messages.slice(0).reverse().map(message => (
                     <ChatMessage
+                        key={message.id}
                         message={message.message}
                         timestamp={message.timestamp}
                         isUser={message.isUser}
