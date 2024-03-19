@@ -30,13 +30,6 @@ function Chatting() {
         message: ''
     });
 
-    // 답변 State
-    const [reply, setReply] = useState({
-        isUser: false,
-        timestamp: '',
-        message: ''
-    });
-
     const [generated_text, setGenerated_text] = useState({})
 
     const [chatLoading, setChatLoading] = useState(false);
@@ -52,7 +45,7 @@ function Chatting() {
                 // 초기화
                 setChat((prevState) => ({ isUser: prevState.isUser, timestamp: '', message: '' }));
                 fetchChat();
-                
+
             }
         }
     };
@@ -63,7 +56,7 @@ function Chatting() {
             setChatList(prevChatList => [...prevChatList, chat]);
             // 초기화
             setChat((prevState) => ({ isUser: prevState.isUser, timestamp: '', message: '' }));
-            // fetchChat();
+            fetchChat();
         }
     };
 
@@ -76,14 +69,13 @@ function Chatting() {
             setChatLoading(() => !chatLoading);
             await axios.post('http://1.235.192.198:5000/osslab', { inputs: chat.message })
                 .then((response) => {
-                    let generated_text = JSON.parse(response.request.responseText).generated_text
-                    let test = {
+                    let generated_text = JSON.parse(response.request.responseText)[0].generated_text;
+                    let reply = {
                         isUser: false,
                         timestamp: getNowDate(),
                         message: generated_text
                     }
-                    setChatList(prevChatList => [...prevChatList, test]);
-
+                    setChatList(prevChatList => [...prevChatList, reply]);
                 }
                 )
         } catch (e) {
@@ -93,7 +85,7 @@ function Chatting() {
     }
 
     return (
-        <Container position="absolute" bottom='25px' >
+        <Container position="absolute" bottom='5vh' >
             <ChatMessageList
                 messages={chatList}
             />
@@ -103,11 +95,12 @@ function Chatting() {
                     value={chat.message}
                     onChange={handleChatMessageChange}
                     onKeyDown={handleChatEnter}
-                    placeholder='Input here!'
+                    placeholder='여기다가 물어보세요!'
                     size='lg'
                     mr='5px'
                 />
                 <IconButton
+                    isDisabled={chatLoading}
                     onClick={handleChatSubmit}
                     size='lg'
                     aria-label='Search database'

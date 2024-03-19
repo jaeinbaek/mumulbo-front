@@ -4,7 +4,7 @@ import Chatting from './Chatting';
 function Body() {
     return (
       <div className="body" >
-             <Container h='calc(100vh)'>
+             <Container h='calc(95vh)'>
                  <Chatting />
              </Container>
       </div>

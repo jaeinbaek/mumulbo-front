@@ -1,7 +1,19 @@
-import { Box, Stack, Text, Divider} from '@chakra-ui/react'
+import { Box, Stack, Text, Divider, IconButton} from '@chakra-ui/react'
+import { SearchIcon } from '@chakra-ui/icons'
 
 function ChatMessage(props) {
-    if (props.isUser) {
+
+    const handleCopyClipBoard = async (text) => {
+        try {
+          await navigator.clipboard.writeText(text);
+          
+          alert('복사 성공!');
+        } catch (error) {
+          alert('복사 실패!');
+        }
+      };
+
+      if (props.isUser) {
         // USER
         return (
             <Stack
@@ -38,6 +50,7 @@ function ChatMessage(props) {
                 >
                     <Text fontSize='m'>{props.message}</Text>
                 </Box>
+                {/* <IconButton aria-label='Search database' icon={<SearchIcon />} /> */}
                 <Divider />
             </Stack>
         );
