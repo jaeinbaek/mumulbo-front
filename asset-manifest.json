@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/mumulbo-front/static/css/main.f855e6bc.css",
-    "main.js": "/mumulbo-front/static/js/main.0c70e896.js",
+    "main.css": "/mumulbo-front/static/css/main.e6c13ad2.css",
+    "main.js": "/mumulbo-front/static/js/main.f726879b.js",
     "static/js/453.ce07e77a.chunk.js": "/mumulbo-front/static/js/453.ce07e77a.chunk.js",
     "index.html": "/mumulbo-front/index.html",
-    "main.f855e6bc.css.map": "/mumulbo-front/static/css/main.f855e6bc.css.map",
-    "main.0c70e896.js.map": "/mumulbo-front/static/js/main.0c70e896.js.map",
+    "main.e6c13ad2.css.map": "/mumulbo-front/static/css/main.e6c13ad2.css.map",
+    "main.f726879b.js.map": "/mumulbo-front/static/js/main.f726879b.js.map",
     "453.ce07e77a.chunk.js.map": "/mumulbo-front/static/js/453.ce07e77a.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.f855e6bc.css",
-    "static/js/main.0c70e896.js"
+    "static/css/main.e6c13ad2.css",
+    "static/js/main.f726879b.js"
   ]
 }
