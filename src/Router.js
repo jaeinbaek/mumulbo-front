@@ -18,7 +18,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "mumulbo-front",
-        element: <App />,
+        element: <ChatBody />,
       }
     ],
   },
