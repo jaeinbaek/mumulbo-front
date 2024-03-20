@@ -16,14 +16,10 @@ export const router = createBrowserRouter([
         path: "",
         element: <ChatBody />,
       },
-    //   {
-    //     path: ":movieId",
-    //     element: <DetailPage />,
-    //   },
-    //   {
-    //     path: "search",
-    //     element: <SearchPage />,
-    //   },
+      {
+        path: "mumulbo-front",
+        element: <App />,
+      }
     ],
   },
 ]);
