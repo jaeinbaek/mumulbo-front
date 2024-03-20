@@ -1,6 +1,5 @@
-import './App.css';
+import { Outlet } from "react-router-dom";
 import { ChakraProvider } from '@chakra-ui/react'
-import Body from './components/Body';
 import Footer from './components/Footer';
 import ToggleThemeSwitch from './components/ToggleThemeSwitch';
 
@@ -11,7 +10,7 @@ function App() {
     <ChakraProvider>
       <div className="App">
         <ToggleThemeSwitch/>
-        <Body />
+        <Outlet />
         <Footer />
       </div>
     </ChakraProvider>

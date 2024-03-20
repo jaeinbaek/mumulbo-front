@@ -1,7 +1,7 @@
 import { Container } from '@chakra-ui/react'
 import Chatting from './Chatting';
 
-function Body() {
+function ChatBody() {
     return (
       <div className="body" >
              <Container h='calc(95vh)'>
@@ -11,5 +11,5 @@ function Body() {
     );
   }
   
-  export default Body;
+  export default ChatBody;
   
