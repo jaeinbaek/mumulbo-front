@@ -1,8 +1,10 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState } from 'react';
 import { Flex, Container, IconButton, Input, Icon } from '@chakra-ui/react'
 import { CheckIcon } from '@chakra-ui/icons'
 import ChatMessageList from './ChatMessageList';
 import axios from 'axios';
+
+import useChattingStore from '../stores/chatting';
 
 function Chatting() {
 
@@ -19,31 +21,22 @@ function Chatting() {
 
         return dateString;
     }
-
-    // 대화목록 State
-    const [chatList, setChatList] = useState([]);
-
-    // 현재 보낼 메시지 State
-    const [chat, setChat] = useState({
-        isUser: true,
-        timestamp: '',
-        message: ''
-    });
-
-    const [generated_text, setGenerated_text] = useState({})
+    const { chat, chatList } = useChattingStore();
+    const { setChat, pushChatList } = useChattingStore(state => state);
 
     const [chatLoading, setChatLoading] = useState(false);
     const [chatError, setChatError] = useState(null);
 
-    const handleChatMessageChange = (event) => setChat((prevState) => ({ ...prevState, timestamp: getNowDate(), message: event.target.value }))
+    const handleChatMessageChange = (event) => setChat({ isUser: true, timestamp: getNowDate(), message: event.target.value })
 
     const handleChatEnter = (e) => {
         if (e.key === "Enter") {
             if (!chat.message) {
+                console.log(chat.message)
             } else {
-                setChatList(prevChatList => [...prevChatList, chat]);
+                pushChatList(chat);
                 // 초기화
-                setChat((prevState) => ({ isUser: prevState.isUser, timestamp: '', message: '' }));
+                setChat({ isUser: true, timestamp: '', message: '' });
                 fetchChat();
 
             }
@@ -53,13 +46,12 @@ function Chatting() {
     const handleChatSubmit = () => {
         if (!chat.message) {
         } else {
-            setChatList(prevChatList => [...prevChatList, chat]);
+            pushChatList(prevChatList => [...prevChatList, chat]);
             // 초기화
-            setChat((prevState) => ({ isUser: prevState.isUser, timestamp: '', message: '' }));
+            setChat({ isUser: true, timestamp: '', message: '' });
             fetchChat();
         }
     };
-
 
     const fetchChat = async () => {
         try {
@@ -69,13 +61,16 @@ function Chatting() {
             setChatLoading(() => !chatLoading);
             await axios.post('http://1.235.192.198:5000/osslab', { inputs: chat.message })
                 .then((response) => {
-                    let generated_text = JSON.parse(response.request.responseText)[0].generated_text;
+                    // 실제
+                    // let generated_text = JSON.parse(response.request.responseText)[0].generated_text;
+                    // 테스트
+                    let generated_text = JSON.parse(response.request.responseText).generated_text;
                     let reply = {
                         isUser: false,
                         timestamp: getNowDate(),
                         message: generated_text
                     }
-                    setChatList(prevChatList => [...prevChatList, reply]);
+                    pushChatList(reply);
                 }
                 )
         } catch (e) {
@@ -86,9 +81,7 @@ function Chatting() {
 
     return (
         <Container position="absolute" bottom='5vh' >
-            <ChatMessageList
-                messages={chatList}
-            />
+            <ChatMessageList />
             <Flex id='a'>
                 <Input
                     isDisabled={chatLoading}

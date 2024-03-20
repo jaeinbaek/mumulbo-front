@@ -2,7 +2,8 @@ import { Box, Stack, Text, Divider, IconButton} from '@chakra-ui/react'
 import { SearchIcon } from '@chakra-ui/icons'
 
 function ChatMessage(props) {
-
+    
+    // 클립보드 복사
     const handleCopyClipBoard = async (text) => {
         try {
           await navigator.clipboard.writeText(text);
