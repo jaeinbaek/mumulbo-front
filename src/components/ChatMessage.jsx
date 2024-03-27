@@ -25,7 +25,7 @@ function ChatMessage(props) {
                 <Box
                     w='100%'
                 >
-                    <Text fontSize='xs'>You, {props.timestamp}</Text>
+                    <Text fontSize='xs'><Text fontSize='xs' as='b'>You</Text>, {props.timestamp}</Text>
                 </Box>
                 <Box
                     w='100%'
@@ -44,7 +44,7 @@ function ChatMessage(props) {
                 <Box
                     w='100%'
                 >
-                    <Text fontSize='xs'>Reply, {props.timestamp}</Text>
+                    <Text fontSize='xs'><Text fontSize='xs' as='b'>Reply</Text>, {props.timestamp}</Text>
                 </Box>
                 <Box
                     w='100%'

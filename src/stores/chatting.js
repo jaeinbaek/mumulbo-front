@@ -1,4 +1,6 @@
-import { create } from 'zustand';
+import {
+    create
+} from 'zustand';
 
 const useChattingStore = create((set) => ({
     chat: {
@@ -7,13 +9,17 @@ const useChattingStore = create((set) => ({
         message: ''
     },
     setChat: newChat =>
-        set({ chat: { ...newChat }}),
+        set({
+            chat: {
+                ...newChat
+            }
+        }),
 
     chatList: [],
     pushChatList: chat =>
-        set((prev) => (
-            { chatList: [...prev.chatList, chat]})
-        ),
+        set((prev) => ({
+            chatList: [...prev.chatList, chat]
+        }))
 }));
 
 export default useChattingStore;
