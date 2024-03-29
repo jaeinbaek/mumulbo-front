@@ -21,18 +21,15 @@ function Chatting() {
 
         return dateString;
     }
-    const { chat, chatList } = useChattingStore();
-    const { setChat, pushChatList } = useChattingStore(state => state);
-
-    const [chatLoading, setChatLoading] = useState(false);
-    const [chatError, setChatError] = useState(null);
+    
+    const { chat, chatLoading, chatError } = useChattingStore();
+    const { setChat, pushChatList, setChatLoading, setChatError } = useChattingStore(state => state);
 
     const handleChatMessageChange = (event) => setChat({ isUser: true, timestamp: getNowDate(), message: event.target.value })
 
     const handleChatEnter = (e) => {
         if (e.key === "Enter") {
             if (!chat.message) {
-                console.log(chat.message)
             } else {
                 pushChatList(chat);
                 // 초기화
@@ -46,7 +43,7 @@ function Chatting() {
     const handleChatSubmit = () => {
         if (!chat.message) {
         } else {
-            pushChatList(prevChatList => [...prevChatList, chat]);
+            pushChatList(chat);
             // 초기화
             setChat({ isUser: true, timestamp: '', message: '' });
             fetchChat();
@@ -56,9 +53,9 @@ function Chatting() {
     const fetchChat = async () => {
         try {
             // 요청이 시작 할 때에는 error 와 users 를 초기화하고
-            setChatError(() => !chatError);
+            setChatError(false);
             // loading 상태를 true 로 바꿉니다.
-            setChatLoading(() => !chatLoading);
+            setChatLoading(true);
             await axios.post('http://1.235.192.198:5000/osslab', { inputs: chat.message })
                 .then((response) => {
                     // 실제
@@ -75,6 +72,13 @@ function Chatting() {
                 )
         } catch (e) {
             setChatError(e);
+            console.log(e)
+            let reply = {
+                isUser: false,
+                timestamp: getNowDate(),
+                message: '에러가 발생했어요! (' + e?.code + ")"
+            }
+            pushChatList(reply);
         }
         setChatLoading(false);
     }

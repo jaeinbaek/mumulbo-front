@@ -19,7 +19,26 @@ const useChattingStore = create((set) => ({
     pushChatList: chat =>
         set((prev) => ({
             chatList: [...prev.chatList, chat]
-        }))
+        })),
+    clearChatting: () => 
+        set({
+            chat: {
+                isUser: true,
+                timestamp: '',
+                message: ''
+            },
+            chatList: []
+        }),
+    chatLoading: false,
+    setChatLoading: newState =>
+        set(
+            { chatLoading: newState }
+        ),
+    chatError: false,
+    setChatError: newState =>
+        set(
+            { chatError: newState }
+        ),
 }));
 
 export default useChattingStore;

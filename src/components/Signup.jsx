@@ -1,64 +1,68 @@
 import { useState } from 'react';
-import { Flex, Container, FormControl, Spacer, FormErrorMessage, FormLabel, Button, Input, InputGroup, InputRightElement } from '@chakra-ui/react'
+import { Flex, Container, FormControl, FormHelperText, FormErrorMessage, FormLabel, Button, Input, InputGroup, InputRightElement } from '@chakra-ui/react'
 import { useNavigate } from "react-router-dom";
 
-import { fetchLogin } from '../api/login';
+import { fetchSignup } from '../api/signup';
 
 
-function Login() {
+function Signup() {
 
     const [show, setShow] = useState(false)
     const handleClick = () => setShow(!show)
 
     const [id, setId] = useState('')
+    const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
     const isError = password === ''
 
     const handleId = (event) => setId(event.target.value)
+    const handleEmail = (event) => setEmail(event.target.value)
     const handlePassword = (event) => setPassword(event.target.value)
 
     const navigate = useNavigate();
     const justNavigate = () => {
-        navigate("/")
+        navigate("/login")
     }
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        fetchLogin(id, password, justNavigate)
-    }
-
-    const handleSignup = (event) => {
-        event.preventDefault();
-        navigate("/signup")
+        fetchSignup(id, email, password, justNavigate)
     }
 
     return (
         <Container h='95vh' pt='30vh'>
-            <Flex justify="center">
-                <form
+            <Flex justify="center" >
+                <form 
                     onSubmit={handleSubmit}
                     width='20rem'
                 >
                     <FormControl width='20rem'>
-                        {/* <FormLabel>Login</FormLabel> */}
+                        {/* <FormLabel>Signup</FormLabel> */}
                         <Input
                             required
                             onChange={handleId}
+                            mb='5px'
                             width='20rem'
                             size='md'
-                            mb='5px'
                             placeholder='ID'
+                        />
+                        <Input
+                            required
+                            onChange={handleEmail}
+                            mb='5px'
+                            width='20rem'
+                            size='md'
+                            placeholder='Email'
                         />
                         <InputGroup
                             mb='10px'
+                            size='md'
                             width='20rem'
                         >
                             <Input
                                 required
                                 onChange={handlePassword}
-                                width='20rem'
-                                size='md'
                                 pr='4.5rem'
                                 type={show ? 'text' : 'password'}
                                 placeholder='Password'
@@ -72,18 +76,9 @@ function Login() {
                             </InputRightElement>
                         </InputGroup>
                         <Button
-                            mb='10px'
-                            width='20rem'
-                            type='submit'
-                            mr='5px'
-                        >
-                            Login
-                        </Button>
-                        <Button
                             mb='30px'
                             width='20rem'
-                            onClick={handleSignup}
-                            variant='ghost'
+                            type='submit'
                         >
                             Sign up
                         </Button>
@@ -94,4 +89,4 @@ function Login() {
     );
 }
 
-export default Login;
+export default Signup;
