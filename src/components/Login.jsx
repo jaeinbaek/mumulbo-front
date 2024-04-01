@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Flex, Container, FormControl, Spacer, FormErrorMessage, FormLabel, Button, Input, InputGroup, InputRightElement } from '@chakra-ui/react'
+import { Flex, Container, FormControl, Text, FormErrorMessage, FormLabel, Button, Input, InputGroup, InputRightElement } from '@chakra-ui/react'
 import { useNavigate } from "react-router-dom";
 
 import { fetchLogin } from '../api/login';
@@ -36,6 +36,7 @@ function Login() {
     return (
         <Container h='95vh' pt='30vh'>
             <Flex justify="center">
+
                 <form
                     onSubmit={handleSubmit}
                     width='20rem'

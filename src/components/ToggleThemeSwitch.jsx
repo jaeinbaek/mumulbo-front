@@ -1,7 +1,5 @@
 import { 
   useColorMode,
-  Switch,
-  Text,
   Flex,
   Button,
   ButtonGroup
@@ -33,8 +31,6 @@ function ToggleThemeSwitch() {
           <Button onClick={toggleColorMode} size='xs'>Color Mode</Button>
           <Button onClick={logout} size='xs'>Logout</Button>
           </ButtonGroup>
-          {/* <Text fontSize='xs' as='kbd' mr='8px'>Dark/Light</Text> */}
-          {/* <Switch onChange={toggleColorMode}></Switch> */}
         </Flex>
     );
   }
