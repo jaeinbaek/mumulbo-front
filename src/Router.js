@@ -5,15 +5,12 @@ import useAuthStore from '../src/stores/auth';
 import App from "./App";
 import Login from './components/Login';
 import Signup from './components/Signup';
-import ChatBody from './components/ChatBody';
+import ChatBody from './components/chatting/ChatBody';
 import NotFound from './components/NotFound';
 
 
 const PrivateRoute = ({ children }) => {
     const isAuthenticated = useAuthStore((state) => state.authToken.authenticated)
-
-    // const isAuthenticated = useAuthStore.subscribe(state => {return state.authToken.authenticated});
-    // const isAuthenticated = useAuthStore.subscribe(state => {return state.authToken.authenticated});
     return isAuthenticated ? children : <Navigate to="/login" />;
   }
   
@@ -30,6 +27,13 @@ export const router = createBrowserRouter([
             <PrivateRoute>
                 <ChatBody />
             </PrivateRoute>),
+      },
+      {
+        path: "chatting/:id",
+        element: (
+          <PrivateRoute>
+              <ChatBody />
+          </PrivateRoute>),
       },
       {
         path: "login",
