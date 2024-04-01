@@ -1,6 +1,6 @@
 import { Flex, Stack, Text, Spinner } from '@chakra-ui/react'
 import ChatMessage from './ChatMessage';
-import useChattingStore from '../stores/chatting';
+import useChattingStore from '../../stores/chatting';
 
 function ChatMessageList(props) {
 
@@ -8,7 +8,7 @@ function ChatMessageList(props) {
 
     return (
         <Flex h='85vh' overflow-y='auto' direction='column-reverse' overflowY='auto'>
-            { chatLoading ? <Spinner /> : null }
+            { chatLoading ? <Spinner size='md' mb='1rem'/> : null }
             {
                 chatList.slice(0).reverse().map(message => (
                     <ChatMessage
@@ -16,6 +16,7 @@ function ChatMessageList(props) {
                         message={message.message}
                         timestamp={message.timestamp}
                         isUser={message.isUser}
+                        isError={message.isError}
                     />
                 ))
             }

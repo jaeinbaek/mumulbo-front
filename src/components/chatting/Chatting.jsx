@@ -3,10 +3,14 @@ import { Flex, Container, IconButton, Input, Icon } from '@chakra-ui/react'
 import { CheckIcon } from '@chakra-ui/icons'
 import ChatMessageList from './ChatMessageList';
 import axios from 'axios';
+import { Link, useParams } from "react-router-dom";
 
-import useChattingStore from '../stores/chatting';
+import useChattingStore from '../../stores/chatting';
 
 function Chatting() {
+
+    const params = useParams();
+    const prdId = params.id;
 
     const getNowDate = () => {
         // FE개발용 타임스탬프 생성로직
@@ -64,6 +68,7 @@ function Chatting() {
                     let generated_text = JSON.parse(response.request.responseText).generated_text;
                     let reply = {
                         isUser: false,
+                        isError: false,
                         timestamp: getNowDate(),
                         message: generated_text
                     }
@@ -75,8 +80,9 @@ function Chatting() {
             console.log(e)
             let reply = {
                 isUser: false,
+                isError: true,
                 timestamp: getNowDate(),
-                message: '에러가 발생했어요! (' + e?.code + ")"
+                message: e?.code
             }
             pushChatList(reply);
         }
@@ -84,7 +90,8 @@ function Chatting() {
     }
 
     return (
-        <Container position="absolute" bottom='5vh' >
+        <Container>
+            {prdId}
             <ChatMessageList />
             <Flex id='a'>
                 <Input
