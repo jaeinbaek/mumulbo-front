@@ -1,10 +1,13 @@
 import { Flex, Stack, Text, Spinner } from '@chakra-ui/react'
 import ChatMessage from './ChatMessage';
+
 import useChattingStore from '../../stores/chatting';
+import useChatListStore from '../../stores/chatList';
 
 function ChatMessageList(props) {
 
     const { chatList, chatLoading } = useChattingStore();
+    const { selectedChat } = useChatListStore();
 
     return (
         <Flex h='85vh' overflow-y='auto' direction='column-reverse' overflowY='auto'>
@@ -25,12 +28,13 @@ function ChatMessageList(props) {
                 fontSize='4xl'
                 as='b'
             >
-                무물보입니다 🎓
+                {selectedChat.title}
             </Text>
             <Text
+                fontSize='xs'
                 mb='50px'
             >
-                모르는거 빼고 다 압니다~
+                {selectedChat.id}
             </Text>
             </Stack>
 

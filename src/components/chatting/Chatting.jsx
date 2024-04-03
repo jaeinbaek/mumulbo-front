@@ -27,6 +27,7 @@ function Chatting() {
     }
     
     const { chat, chatLoading, chatError } = useChattingStore();
+
     const { setChat, pushChatList, setChatLoading, setChatError } = useChattingStore(state => state);
 
     const handleChatMessageChange = (event) => setChat({ isUser: true, timestamp: getNowDate(), message: event.target.value })
@@ -91,7 +92,6 @@ function Chatting() {
 
     return (
         <Container>
-            {prdId}
             <ChatMessageList />
             <Flex id='a'>
                 <Input

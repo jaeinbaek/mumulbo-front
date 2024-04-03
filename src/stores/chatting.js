@@ -14,7 +14,6 @@ const useChattingStore = create((set) => ({
                 ...newChat
             }
         }),
-
     chatList: [],
     pushChatList: chat =>
         set((prev) => ({
