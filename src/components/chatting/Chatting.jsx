@@ -65,7 +65,7 @@ function Chatting() {
             setChatError(false);
             // loading 상태를 true 로 바꿉니다.
             setChatLoading(true);
-            await axios.post('http://20.39.201.16:5000/osslab', { inputs: chat.message })
+            await axios.post('http://1.235.192.197:8080/redhat/query', { inputs: chat.message })
                 .then((response) => {
                     // 실제
                     let generated_text = response.data.response;
