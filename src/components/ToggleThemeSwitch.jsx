@@ -22,14 +22,13 @@ function ToggleThemeSwitch() {
     
     return (
         <Flex 
-          w='150px' 
           position='fixed'
-          top='10px'
-          right='20px'
+          top='1rem'
+          right='1rem'
         >
           <ButtonGroup gap='1'>
-          <Button onClick={toggleColorMode} size='xs'>Color Mode</Button>
-          <Button onClick={logout} size='xs'>Logout</Button>
+          <Button onClick={toggleColorMode} size='xs'>색상모드</Button>
+          <Button onClick={logout} size='xs'>로그아웃</Button>
           </ButtonGroup>
         </Flex>
     );

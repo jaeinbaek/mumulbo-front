@@ -8,6 +8,7 @@ import useChattingStore from '../../stores/chatting';
 function ChatList(props) {
 
     const { chatList, chatLoading } = useChatListStore();
+    
     const { deleteSelectedChat } = useChatListStore(state => state);
     const { clearChatting } = useChattingStore(state => state);
 
@@ -15,6 +16,7 @@ function ChatList(props) {
         deleteSelectedChat();
         clearChatting();
     }
+
 
     return (
         <Stack
@@ -25,7 +27,7 @@ function ChatList(props) {
                 fontSize='lg'
                 as='b'
             >
-                Chatting List
+                채팅목록
             </Text>
             <IconButton
                 onClick={handleAddChatButton}

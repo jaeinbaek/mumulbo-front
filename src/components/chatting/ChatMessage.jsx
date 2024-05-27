@@ -5,18 +5,35 @@ import {
     Divider,
     Code,
     IconButton,
-    Flex
+    Flex,
+    useToast
 } from '@chakra-ui/react'
 import { CopyIcon } from '@chakra-ui/icons'
 
 function ChatMessage(props) {
+    const toast = useToast()
     // 클립보드 복사
     const handleCopyClipBoard = async () => {
         try {
             await navigator.clipboard.writeText(props.message);
-            alert('클립보드에 복사되었습니다');
+            // alert('클립보드에 복사되었습니다');
+            toast({
+                title: '복사 성공!',
+                description: "메시지 내용이 클립보드에 복사되었어요.",
+                status: 'success',
+                position: 'bottom-right',
+                duration: 3000,
+                isClosable: true,
+              })
         } catch (error) {
-            alert('복사 실패!');
+            toast({
+                title: '복사 실패!',
+                description: "복사 과정에서 에러가 발생했습니다.",
+                status: 'error',
+                position: 'bottom-right',
+                duration: 3000,
+                isClosable: true,
+              })
         }
     };
 
@@ -55,7 +72,8 @@ function ChatMessage(props) {
                 {/* Message Information */}
                 <Flex
                     w='100%'
-                    alignItems='center' gap='2'
+                    alignItems='center'
+                    gap='2'
                 >
                     <Text fontSize='xs'><Text fontSize='xs' as='b'>Information</Text>, {props.timestamp}</Text>
                     <IconButton

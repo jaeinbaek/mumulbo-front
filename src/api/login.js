@@ -12,6 +12,7 @@ export const fetchLogin = async (id, password, callback) => {
         await axios.post('http://1.235.192.197:8000/token', data)
             .then((response) => {
                 useAuthStore.getState().setToken(response.data.access_token)
+                // console.log(useAuthStore.getState().setToken(response.data.refresh_token))
                 // Navigate 실행
                 callback()
             })

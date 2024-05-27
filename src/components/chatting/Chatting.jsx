@@ -2,10 +2,12 @@ import { useState } from 'react';
 import { Flex, Container, IconButton, Input, Icon } from '@chakra-ui/react'
 import { CheckIcon } from '@chakra-ui/icons'
 import ChatMessageList from './ChatMessageList';
+import ChatLandingPage from './chatLandingPage';
 import axios from 'axios';
 import { Link, useParams } from "react-router-dom";
 
 import useChattingStore from '../../stores/chatting';
+import useChatListStore from '../../stores/chatList';
 
 function Chatting() {
 
@@ -27,6 +29,8 @@ function Chatting() {
     }
     
     const { chat, chatLoading, chatError } = useChattingStore();
+    // 현재 선택된 대화 정보
+    const { selectedChat } = useChatListStore();
 
     const { setChat, pushChatList, setChatLoading, setChatError } = useChattingStore(state => state);
 
@@ -61,12 +65,12 @@ function Chatting() {
             setChatError(false);
             // loading 상태를 true 로 바꿉니다.
             setChatLoading(true);
-            await axios.post('http://1.235.192.198:5000/osslab', { inputs: chat.message })
+            await axios.post('http://20.39.201.16:5000/osslab', { inputs: chat.message })
                 .then((response) => {
                     // 실제
-                    // let generated_text = JSON.parse(response.request.responseText)[0].generated_text;
+                    let generated_text = response.data.response;
                     // 테스트
-                    let generated_text = JSON.parse(response.request.responseText).generated_text;
+                    // let generated_text = JSON.parse(response.request.responseText).generated_text;
                     let reply = {
                         isUser: false,
                         isError: false,
@@ -92,7 +96,7 @@ function Chatting() {
 
     return (
         <Container>
-            <ChatMessageList />
+            { selectedChat.id === '' ? <ChatLandingPage /> :  <ChatMessageList />}
             <Flex id='a'>
                 <Input
                     isDisabled={chatLoading}

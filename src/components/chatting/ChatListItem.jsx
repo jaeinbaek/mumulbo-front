@@ -1,16 +1,20 @@
-import { Flex, Stack, Text, Divider } from '@chakra-ui/react'
+import { Flex, Spacer, Stack, Text, Divider, CloseButton } from '@chakra-ui/react'
 import { useNavigate } from "react-router-dom";
 
 import useChatListStore from '../../stores/chatList';
+import useChattingStore from '../../stores/chatting';
 
 function ChatListItem(props) {
 
     const navigate = useNavigate();
     const { setSelectedChat } = useChatListStore(state => state);
+    const { clearChatting } = useChattingStore(state => state);
 
     const navigateToChat = (event) => {
         navigate(`/chatting/${props.id}`)
         setSelectedChat({ id: props.id, title: props.title })
+        clearChatting();
+
     }
 
     return (
@@ -18,15 +22,26 @@ function ChatListItem(props) {
             onClick={navigateToChat}
             pt='1rem'
         >
-            <Text fontSize='xs'>
-                {props.id}
-            </Text>
-            <Text
-                fontSize='sm'
-                as='b'
+            <Flex
+                w='100%'
+                alignItems='center'
+                gap='2'
             >
-                {props.title}
-            </Text>
+                <Stack>
+                    <Text fontSize='xs'>
+                        {props.id}
+                    </Text>
+                    <Text
+                        fontSize='sm'
+                        as='b'
+                    >
+                        {props.title}
+                    </Text>
+
+                </Stack>
+                <Spacer />
+                <CloseButton size='sm' />
+            </Flex>
             <Divider />
         </Stack>
     );

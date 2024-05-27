@@ -1,12 +1,14 @@
 import {
     create
 } from 'zustand';
-
-export const TOKEN_TIME_OUT = 600 * 1000;
+// 15분 설정
+export const TOKEN_TIME_OUT = 60 * 15;
+// export const TOKEN_TIME_OUT = 600 * 1000;
 
 const useAuthStore = create((set) => ({
     authToken: {
-        authenticated: false,
+        authenticated: true,
+        // authenticated: false,
         accessToken: null,
         expireTime: null
     },
